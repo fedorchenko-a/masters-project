@@ -1,4 +1,4 @@
-Flask==3.0.0
+Flask==2.2.5
 Flask-Caching
 Flask-Session2
 Flask-SQLAlchemy
