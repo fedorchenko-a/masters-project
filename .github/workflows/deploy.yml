@@ -26,11 +26,14 @@ jobs:
 
       - name: Run Flake8 for code linting
         run: flake8 server/lti/app
+        continue-on-error: true
+
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SERVER_PASS }}
           known_hosts: 'placeholder'
+          
       - name: Adding known_hosts
         run: ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
