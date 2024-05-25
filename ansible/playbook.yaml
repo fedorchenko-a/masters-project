@@ -1,0 +1,5 @@
+---
+- hosts: server
+  become: yes
+  roles:
+    - ansible_role_lti

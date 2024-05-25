@@ -1,0 +1,95 @@
+---
+- name: Update apt package list
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: Ensure build dependencies are installed
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - software-properties-common
+    - build-essential
+    - libssl-dev
+    - zlib1g-dev
+    - libncurses5-dev
+    - libnss3-dev
+    - libgdbm-dev
+    - libreadline-dev
+    - libffi-dev
+  become: yes
+
+- name: Add deadsnakes PPA
+  apt_repository:
+    repo: ppa:deadsnakes/ppa
+    state: present
+  become: yes
+
+- name: Install Python 3.11
+  apt:
+    name: python3.11
+    state: present
+  become: yes
+
+- name: Ensure pip and venv for Python 3.11 are installed
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python3.11-venv
+    - python3.11-distutils
+  become: yes
+
+- name: Ensure the target directory exists
+  file:
+    path: /opt/apps/lti
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+
+- name: Copy the entire lti directory recursively
+  copy:
+    src: ../../../server/lti/
+    dest: /opt/apps/lti
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+
+- name: Create a virtual environment with Python 3.11
+  command: /usr/bin/python3.11 -m venv /opt/apps/lti/env
+  args:
+    creates: /opt/apps/lti/env/bin/python
+  become: yes
+
+- name: Install dependencies in the virtual environment
+  pip:
+    requirements: /opt/apps/lti/app/requirements.txt
+    virtualenv: /opt/apps/lti/env
+
+- name: Create systemd service file
+  template:
+    src: lti.service.j2
+    dest: /etc/systemd/system/lti.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Restart LTI service
+  become: yes
+
+- name: Reload systemd daemon
+  systemd:
+    daemon_reload: yes
+  become: yes
+
+- name: Enable and start the LTI service
+  systemd:
+    name: lti
+    enabled: yes
+    state: started
+  become: yes
