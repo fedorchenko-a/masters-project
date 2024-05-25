@@ -1,0 +1,6 @@
+---
+- name: Restart LTI service
+  systemd:
+    name: lti
+    state: restarted
+    enabled: yes
