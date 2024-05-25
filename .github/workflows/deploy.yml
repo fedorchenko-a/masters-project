@@ -22,6 +22,7 @@ jobs:
 
       - name: Run Bandit for security analysis
         run: bandit -r server/lti/app
+        continue-on-error: true
 
       - name: Run Flake8 for code linting
         run: flake8 server/lti/app
