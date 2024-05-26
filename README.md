@@ -50,3 +50,11 @@ server ansible_host=server_ip ansible_user=ubuntu
 cd ansible
 ansible-playbook -i inventory.ini playbook.yaml
 ```
+# Github action configuration
+Open Settings - Secrets and Variables - Actions
+Create repository secrets:
+```bash
+SERVER_HOST
+SERVER_PASS
+SERVER_USER
+```
