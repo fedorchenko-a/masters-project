@@ -69,5 +69,5 @@ git tag -s 1.0.0 -m "LTI release for 1.0.0 deployment ver"
 git push origin 1.0.0
 ``` 
 
-This documentation provides an overview of the Ansible setup and GitHub Actions workflows used in this project. Ensure you customize the configurations as needed for your specific environment.
+This documentation provides an overview of the Ansible setup and GitHub Actions workflows used in this project. Ensure you customize the configurations as needed for your specific environment. \
 For more detailed setup instructions, see the [Terraform](docs/terraform.md).
