@@ -26,8 +26,7 @@ The repository is organized as follows:
 
 **Setup Instructions**
 
-Step 1: Configure AWS CLI
-
+**Step 1: Configure AWS CLI**
 Ensure your AWS CLI is configured with the necessary credentials:
 ```sh
 aws configure
