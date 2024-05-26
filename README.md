@@ -63,6 +63,6 @@ SERVER_USER
 
 # Deploy via Github actions will be triggered only if tag created
 ```bash
-git tag -s 1.0.0 -m "LTI release for 1.0.0 deployment version"
+git tag -s 1.0.0 -m "LTI release for 1.0.0 deployment ver"
 git push orgigin 1.0.0
 ``` 
