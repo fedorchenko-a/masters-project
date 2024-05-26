@@ -59,10 +59,12 @@ SERVER_PASS
 SERVER_USER
 ```
 
-# Tests triggered on MR to master branch
 
-# Deploy via Github actions will be triggered only if tag created
+
+# Github Actions
+Deploy via Github actions will be triggered only if tag created.
+Tests triggered on MR to master branch.
 ```bash
 git tag -s 1.0.0 -m "LTI release for 1.0.0 deployment ver"
-git push orgigin 1.0.0
+git push origin 1.0.0
 ``` 
